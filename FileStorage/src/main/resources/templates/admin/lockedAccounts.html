@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href = "/css/style.css"/>
+ 
+<script src="/js/session-timeout.js"></script>
+    <title>Locked Accounts</title>
+</head>
+<nav th:replace="public/navbar"></nav>
+<body>
+
+
+<div class="user_profile ">
+	
+<div class="content">
+    <h1>Locked Accounts</h1>
+    <form th:action="@{/reactivateAccounts}" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Reactivate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${lockedUsers}">
+                    <td th:text="${user.username}"></td>
+                    <td>
+                        <input type="checkbox" name="reactivateUsers" th:value="${user.username}">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Reactivate Selected Accounts</button>
+    </form>
+</div>
+</div>
+</body>
+</html>

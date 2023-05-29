@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="/js/session-timeout.js"></script>
+    <title>Registration</title>
+</head>
+<nav th:replace="public/navbar"></nav>
+<body >
+ <div class="container content">
+  <div class="login">
+        <div class="col-md-6 col-md-offset-3">
+          
+<h1>Registration Form</h1>
+<form action="/registration" method="POST" enctype="utf8" onsubmit="return validatePassword();">   
+<form action="#" th:action="@{/registration}" th:object="${userRegistrationDto}" method="POST" enctype="utf8" onsubmit="validatePassword();">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+     <div class="form-group">
+        <label>User Name</label>
+        <input name="userName" required  class="form-control" placeholder="User Name" th:field="*{userName}"/>
+        <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">First Name Error</p>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required placeholder="Email" th:field="*{email}"/>
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" class="form-control" name="password" required placeholder="Password" th:field="*{password}"/>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" class="form-control" name="matchingPassword" required placeholder="Confirm Password" th:field="*{matchingPassword}"/>
+        <p th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}">Confirm Password Error</p>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<div>Already have an account, clik here</div>
+<a href="/login">Login</a>
+</div>
+  </div>
+ </div>
+</body>
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password");
+        var confirmPassword = document.getElementById("confirmPassword");
+
+        if (password.value !== confirmPassword.value) {
+            alert("Passwords do not match.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('/csrf')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('input[name="_csrf"]').value = data.token;
+            });
+    });
+</script>
+</html>

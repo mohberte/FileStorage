@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Files</title>
+</head>
+<body>
+    <h1>Files</h1>
+    <ul>
+        <li th:each="fileUrl : ${fileUrls}">
+            <a th:href="${fileUrl}" th:text="${fileUrl}"></a>
+        </li>
+    </ul>
+</body>
+</html>

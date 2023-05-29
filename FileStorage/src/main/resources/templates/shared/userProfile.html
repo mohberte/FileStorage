@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/css/hovering_checkbox.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href = "/css/style.css"/>
+
+	<script src="/js/session-timeout.js"></script>
+	<meta charset="UTF-8">
+	<title>User Profile</title>
+</head>
+
+<nav th:replace="public/navbar"></nav>
+<body >
+
+
+<div class="user_profile ">
+	
+  <div class = "aside-left">
+	
+	</div>
+	<div class="content ">
+		<h1>User Profile</h1>
+<p>
+        <span th:text="'First Name: ' + ${session.userProfile != null ? session.userProfile.firstName : ''}"></span>
+        <button type="button" onclick="toggleEdit('editFirstNameForm')">Edit</button>
+    </p>
+    <form id="editFirstNameForm" th:action="@{/update_first_name}" th:object="${updateFirstNameDto}" method="post" style="display:none;">
+        <input type="text" th:field="*{firstName}" required/>
+        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></p>
+        <button type="submit">Save</button>
+    </form>
+
+    <p>
+        <span th:text="'Last Name: ' + ${session.userProfile != null ? session.userProfile.lastName : ''}"></span>
+        <button type="button" onclick="toggleEdit('editLastNameForm')">Edit</button>
+    </p>
+     <form id="editLastNameForm" th:action="@{/update_last_name}" th:object="${updateLastNameDto}" method="post" style="display:none;">
+        <input type="text" th:field="*{lastName}" required/>
+        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></p>
+        <button type="submit">Save</button>
+    </form>
+    
+<p>
+    <span th:text="'Email: ' + ${session.userProfile != null ? session.userProfile.email : ''}"></span>
+    <button type="button" onclick="toggleEdit('editEmailForm')">Edit</button>
+</p>
+<form id="editEmailForm" th:action="@{/update_email}" th:object="${updateEmailDto}" method="post" style="display:none;">
+    <input type="email" th:field="*{email}" required/>
+    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></p>
+    <button type="submit">Save</button>
+</form>
+
+<p>
+    <span>Password:</span>
+    <button type="button" onclick="toggleEdit('editPasswordForm')">Edit</button>
+</p>
+<form id="editPasswordForm" th:action="@{/update_password}" th:object="${updatePasswordDto}" method="post" style="display:none;">
+    <input type="password" th:field="*{password}" required/>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></p>
+    <button type="submit">Save</button>
+</form>
+
+    <p id="sessionTimeout"></p> 
+    
+</div>
+</div>
+
+</body>
+<script>
+function toggleEdit(formId) {
+    var form = document.getElementById(formId);
+    form.style.display = form.style.display === "none" ? "block" : "none";
+}
+</script>
+
+</html>

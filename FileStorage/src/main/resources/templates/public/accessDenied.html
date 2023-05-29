@@ -1,0 +1,25 @@
+111<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href = "/css/style.css"/>
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+<script src="/js/session-timeout.js"></script>
+    <meta charset="UTF-8"/>
+    <title>Access Denied</title>
+</head>
+<nav th:replace="public/navbar"></nav>
+<body >
+ <div class="container">
+    <h1>Access Denied</h1>
+    <div> Your session is about to timeout  </div>
+    <div><span id="time"> </span>
+        <span id="timeout">seconds left </span>
+    </div>
+    <p>You do not have permission to access this page.</p>
+    <a href="/">Go back to the home pageee</a>
+ </div>
+</body>
+</html>

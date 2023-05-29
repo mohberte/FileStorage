@@ -1,0 +1,59 @@
+
+/* Add this to your /css/style.css file */
+.checkbox-container {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.file-entry.checked .checkbox-container,
+.file-entry:hover .checkbox-container {
+    opacity: 1;
+}
+
+
+.file-checkbox {
+    position: absolute;
+    opacity: 1;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.custom-checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.file-checkbox:checked ~ .custom-checkbox {
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+
+.file-checkbox:checked ~ .custom-checkbox:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translateY(-1px);
+    left: 4px;
+    top: 1px;
+}

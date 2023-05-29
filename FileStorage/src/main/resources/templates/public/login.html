@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href = "/css/style.css"/>
+<script src="/js/session-timeout.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Login</title>
+    
+</head>
+<nav th:replace="public/navbar"></nav>
+<body> 
+
+<div class="container">
+    <div class="login">
+        <div class="col-md-6 col-md-offset-3">
+            <h2 class="text-center">Login</h2>
+            <form th:action="@{/customLogin}" method="POST">
+            <input type="hidden" id="sessionTimeout" value="30000">
+
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="error-message" th:if="${session.loginError}">
+				    <p th:text="${session.loginError}" class="text-danger"></p>
+				</div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>
